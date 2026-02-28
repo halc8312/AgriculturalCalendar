@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="沖縄県北部（やんばる）の野菜・果物栽培ガイド。栽培カレンダー・島野菜28品目・北部特産品・栄養成分を網羅。">
+<title>🌿 やんばる農業ガイド｜沖縄北部の野菜・果物カタログ</title>
+<style>
+  :root {
+    --green-deep: #1a5c2a;
+    --green-mid: #2d8a45;
+    --green-light: #4caf65;
+    --teal: #00897b;
+    --orange: #ef6c00;
+    --yellow: #f9a825;
+    --red: #c62828;
+    --blue: #1565c0;
+    --purple: #6a1b9a;
+    --bg: #f4f9f4;
+    --card-bg: #ffffff;
+    --text: #1b2b1d;
+    --text-light: #4a6652;
+    --border: #c8e6c9;
+    --shadow: 0 2px 8px rgba(0,0,0,0.10);
+    --radius: 12px;
+    --font: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--green-deep) 0%, var(--teal) 100%);
+    color: white; padding: 20px 16px 16px; text-align: center;
+    position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  header h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.03em; }
+  header p { font-size: 0.78rem; opacity: 0.85; margin-top: 3px; }
+
+  /* ===== NAV TABS ===== */
+  nav {
+    background: var(--green-deep);
+    display: flex; overflow-x: auto; gap: 0;
+    border-bottom: 3px solid var(--green-light);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav button {
+    flex: 0 0 auto; color: rgba(255,255,255,0.75); background: none;
+    border: none; padding: 10px 14px; font-size: 0.78rem; cursor: pointer;
+    white-space: nowrap; transition: all 0.2s; font-family: var(--font);
+    border-bottom: 3px solid transparent; margin-bottom: -3px;
+  }
+  nav button.active, nav button:hover { color: #fff; border-bottom-color: var(--yellow); background: rgba(255,255,255,0.08); }
+
+  /* ===== SEARCH ===== */
+  .search-wrap { padding: 12px 16px; background: white; border-bottom: 1px solid var(--border); }
+  .search-wrap input {
+    width: 100%; padding: 9px 14px 9px 36px; border-radius: 24px;
+    border: 1.5px solid var(--border); font-size: 0.9rem; outline: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%234caf65' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.408a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z'/%3E%3C/svg%3E") 10px center no-repeat;
+    background-color: var(--bg); transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--green-mid); background-color: white; }
+
+  /* ===== SECTIONS ===== */
+  .section { display: none; padding: 0 0 60px; }
+  .section.active { display: block; }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header {
+    background: linear-gradient(90deg, var(--green-deep), var(--teal));
+    color: white; padding: 14px 16px; margin-bottom: 12px;
+  }
+  .section-header h2 { font-size: 1.05rem; }
+  .section-header p { font-size: 0.78rem; opacity: 0.85; margin-top: 2px; }
+
+  /* ===== CARDS ===== */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 12px; }
+  @media (min-width: 480px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 700px) { .cards { grid-template-columns: repeat(4, 1fr); } }
+
+  .card {
+    background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+    overflow: hidden; cursor: pointer; transition: transform 0.18s, box-shadow 0.18s;
+    border: 1px solid var(--border);
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.13); }
+  .card-emoji { font-size: 2rem; text-align: center; padding: 12px 8px 4px; display: block; }
+  .card-body { padding: 0 10px 12px; }
+  .card-name { font-weight: 700; font-size: 0.9rem; color: var(--green-deep); }
+  .card-sub { font-size: 0.7rem; color: var(--text-light); }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 5px; }
+  .tag {
+    font-size: 0.62rem; padding: 2px 6px; border-radius: 10px; font-weight: 600;
+  }
+  .tag-season { background: #e8f5e9; color: var(--green-deep); }
+  .tag-north { background: #e3f2fd; color: #0d47a1; }
+  .tag-island { background: #fff3e0; color: #e65100; }
+  .tag-fruit { background: #fce4ec; color: #b71c1c; }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+    z-index: 200; align-items: flex-end; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white; border-radius: 20px 20px 0 0; width: 100%; max-width: 600px;
+    max-height: 88vh; overflow-y: auto; padding: 20px 16px 32px;
+    animation: slideUp 0.25s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .modal-handle { width: 40px; height: 4px; background: #ddd; border-radius: 4px; margin: 0 auto 14px; }
+  .modal h3 { font-size: 1.2rem; color: var(--green-deep); border-bottom: 2px solid var(--green-light); padding-bottom: 6px; }
+  .modal-emoji { font-size: 3rem; text-align: center; display: block; margin-bottom: 6px; }
+  .modal-close {
+    position: absolute; top: 12px; right: 14px; background: #eee; border: none;
+    border-radius: 50%; width: 30px; height: 30px; font-size: 1.1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-relative { position: relative; }
+  .info-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .info-chip {
+    font-size: 0.72rem; padding: 4px 10px; border-radius: 12px;
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+  }
+  .info-chip strong { color: var(--green-deep); }
+  .detail-section { margin-top: 14px; }
+  .detail-section h4 { font-size: 0.85rem; color: var(--teal); font-weight: 700; margin-bottom: 6px; }
+  .detail-section p, .detail-section li { font-size: 0.82rem; color: var(--text-light); }
+  .detail-section ul { padding-left: 16px; }
+  .nutrient-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 6px; }
+  .nutrient-item {
+    background: #f1f8f1; border-radius: 8px; padding: 5px 8px;
+    font-size: 0.75rem; border-left: 3px solid var(--green-light);
+  }
+  .nutrient-item span { display: block; font-weight: 700; color: var(--green-deep); }
+
+  /* ===== CALENDAR TABLE ===== */
+  .cal-wrap { overflow-x: auto; padding: 0 12px 12px; -webkit-overflow-scrolling: touch; }
+  table.cal {
+    width: 100%; border-collapse: collapse; font-size: 0.7rem;
+    min-width: 520px; background: white; border-radius: 10px; overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .cal th {
+    background: var(--green-deep); color: white; padding: 6px 4px;
+    text-align: center; font-size: 0.7rem; font-weight: 600; position: sticky; top: 0;
+  }
+  .cal th:first-child, .cal td:first-child { text-align: left; padding-left: 8px; min-width: 90px; position: sticky; left: 0; background: white; z-index: 1; }
+  .cal th:first-child { background: var(--green-deep); }
+  .cal td { padding: 5px 2px; border-bottom: 1px solid #e8f5e9; text-align: center; }
+  .cal tr:nth-child(even) td { background: #f9fdf9; }
+  .cal tr:hover td { background: #e8f5e9; }
+  .dot-sow { display:inline-block; width:10px; height:10px; background:#81d4fa; border-radius:50%; }
+  .dot-plant { display:inline-block; width:10px; height:10px; background:#a5d6a7; border-radius:50%; }
+  .dot-harvest { display:inline-block; width:10px; height:10px; background:#ef9a9a; border-radius:50%; }
+  .dot-peak { display:inline-block; width:10px; height:10px; background:#e53935; border-radius:50%; }
+  .dot-yearround { display:inline-block; width:8px; height:8px; background:var(--green-mid); border-radius:50%; opacity:0.7; }
+  .dot-available { display:inline-block; width:10px; height:10px; background:#ffcc80; border-radius:50%; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px 12px; font-size: 0.72rem; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+
+  /* ===== NORTH LIST ===== */
+  .north-area { padding: 0 12px 12px; }
+  .area-card {
+    background: white; border-radius: var(--radius); box-shadow: var(--shadow);
+    margin-bottom: 12px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .area-card-head {
+    background: linear-gradient(90deg, var(--teal), #00acc1);
+    color: white; padding: 10px 14px; font-weight: 700; font-size: 0.9rem;
+  }
+  .area-card-body { padding: 10px 14px; }
+  .area-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px dashed #e0f2f1; }
+  .area-item:last-child { border-bottom: none; }
+  .area-item .em { font-size: 1.3rem; min-width: 28px; }
+  .area-item .info { flex: 1; }
+  .area-item .info strong { font-size: 0.84rem; color: var(--green-deep); }
+  .area-item .info small { display: block; font-size: 0.71rem; color: var(--text-light); }
+  .harvest-bar { height: 6px; background: #e8f5e9; border-radius: 3px; margin-top: 3px; overflow: hidden; }
+  .harvest-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--green-mid), var(--yellow)); }
+
+  /* ===== ISLAND VEG GRID ===== */
+  .island-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 12px; }
+  @media (min-width: 480px) { .island-grid { grid-template-columns: repeat(3, 1fr); } }
+  .island-card {
+    background: white; border-radius: 10px; padding: 10px; box-shadow: var(--shadow);
+    border: 1px solid var(--border); cursor: pointer; transition: transform 0.18s;
+  }
+  .island-card:hover { transform: translateY(-2px); }
+  .island-card .ic-emoji { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+  .island-card .ic-name { font-size: 0.82rem; font-weight: 700; color: var(--green-deep); }
+  .island-card .ic-yomi { font-size: 0.68rem; color: #777; }
+  .island-card .ic-tags { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 3px; }
+  .badge { font-size: 0.58rem; padding: 2px 5px; border-radius: 8px; font-weight: 700; background: #fff3e0; color: #e65100; }
+  .badge-summer { background: #fff9c4; color: #f57f17; }
+  .badge-winter { background: #e3f2fd; color: #1565c0; }
+  .badge-yearround { background: #e8f5e9; color: #2e7d32; }
+  .badge-root { background: #fce4ec; color: #880e4f; }
+  .badge-leaf { background: #e8f5e9; color: #1b5e20; }
+  .badge-fruit { background: #f3e5f5; color: #4a148c; }
+
+  /* ===== MANUAL LINKS ===== */
+  .manual-wrap { padding: 0 12px; }
+  .manual-card {
+    background: white; border-radius: 10px; margin-bottom: 10px;
+    box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden;
+  }
+  .manual-card-head { background: var(--green-mid); color: white; padding: 8px 12px; font-size: 0.85rem; font-weight: 700; }
+  .manual-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-bottom: 1px solid #f0f0f0; }
+  .manual-item:last-child { border-bottom: none; }
+  .manual-item a { font-size: 0.8rem; color: var(--blue); text-decoration: none; flex: 1; }
+  .manual-item a:hover { text-decoration: underline; }
+  .manual-item .pdf-badge { font-size: 0.65rem; background: #ffebee; color: var(--red); padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
+
+  /* ===== FRUITS SECTION ===== */
+  .fruit-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 12px; }
+  @media (min-width: 480px) { .fruit-cards { grid-template-columns: repeat(3, 1fr); } }
+  .fruit-card {
+    background: white; border-radius: var(--radius); box-shadow: var(--shadow);
+    border: 1px solid var(--border); padding: 12px 10px; text-align: center; cursor: pointer;
+    transition: transform 0.18s;
+  }
+  .fruit-card:hover { transform: translateY(-2px); }
+  .fruit-card .fc-emoji { font-size: 2.2rem; display: block; margin-bottom: 4px; }
+  .fruit-card .fc-name { font-weight: 700; font-size: 0.88rem; color: var(--green-deep); }
+  .fruit-card .fc-season { font-size: 0.7rem; color: var(--orange); margin-top: 3px; }
+  .fruit-card .fc-area { font-size: 0.68rem; color: var(--text-light); margin-top: 2px; }
+
+  /* ===== NO RESULT ===== */
+  .no-result { text-align: center; padding: 40px 20px; color: var(--text-light); }
+  .no-result .nr-emoji { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--green-deep); color: rgba(255,255,255,0.7); text-align: center; padding: 20px 16px; font-size: 0.72rem; }
+  footer a { color: rgba(255,255,255,0.85); }
+
+  /* ===== CATEGORY FILTER ===== */
+  .cat-filter { display: flex; overflow-x: auto; gap: 6px; padding: 8px 12px; background: white; margin-bottom: 8px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .cat-filter::-webkit-scrollbar { display: none; }
+  .cat-btn {
+    flex: 0 0 auto; font-size: 0.75rem; padding: 5px 12px; border-radius: 16px;
+    border: 1.5px solid var(--border); background: white; cursor: pointer;
+    white-space: nowrap; font-family: var(--font); transition: all 0.18s; color: var(--text-light);
+  }
+  .cat-btn.active { background: var(--green-mid); color: white; border-color: var(--green-mid); }
+
+  /* ===== SCROLL TO TOP ===== */
+  #scrollTop {
+    position: fixed; bottom: 20px; right: 16px; background: var(--green-mid);
+    color: white; border: none; border-radius: 50%; width: 42px; height: 42px;
+    font-size: 1.2rem; box-shadow: 0 3px 10px rgba(0,0,0,0.25); cursor: pointer;
+    display: none; align-items: center; justify-content: center; z-index: 90;
+  }
+  #scrollTop.show { display: flex; }
+  .update-badge { font-size: 0.65rem; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌿 やんばる農業ガイド</h1>
+  <p>沖縄県北部・やんばる地域の野菜・果物・島野菜カタログ</p>
+  <span class="update-badge">📡 出典：JAおきなわ・沖縄県農林水産部・北部農業改良普及センター</span>
+</header>
+
+<nav id="mainNav">
+  <button class="active" onclick="showSection('calendar')">📅 栽培カレンダー</button>
+  <button onclick="showSection('vegetables')">🥬 野菜ガイド</button>
+  <button onclick="showSection('island')">🏝️ 島野菜28品目</button>
+  <button onclick="showSection('fruits')">🍊 北部の果物</button>
+  <button onclick="showSection('north')">📍 地域別特産</button>
+  <button onclick="showSection('manual')">📖 栽培マニュアル</button>
+</nav>
+
+<div class="search-wrap">
+  <input type="search" id="searchInput" placeholder="野菜・果物・栄養素名で検索…" oninput="doSearch()" autocomplete="off">
+</div>
+
+<!-- ========== CALENDAR SECTION ========== -->
+<section class="section active" id="calendar">
+  <div class="section-header">
+    <h2>📅 沖縄北部 月別栽培カレンダー</h2>
+    <p>播種・定植・収穫のめやす（やんばる地域）</p>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="dot-sow"></span> 播種期</div>
+    <div class="legend-item"><span class="dot-plant"></span> 定植期</div>
+    <div class="legend-item"><span class="dot-harvest"></span> 収穫期</div>
+    <div class="legend-item"><span class="dot-peak"></span> 最盛期</div>
+    <div class="legend-item"><span class="dot-yearround"></span> 周年可</div>
+  </div>
+
+  <div class="cal-wrap">
+    <table class="cal" id="calTable">
+      <thead>
+        <tr>
+          <th>品目</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th>
+          <th>5月</th><th>6月</th><th>7月</th><th>8月</th>
+          <th>9月</th><th>10月</th><th>11月</th><th>12月</th>
+        </tr>
+      </thead>
+      <tbody id="calBody"></tbody>
+    </table>
+  </div>
+  <p style="font-size:0.68rem;color:#888;padding:6px 14px;">※栽培時期の目安です。気象条件・品種により異なります。出典：JAおきなわ生産カレンダー・沖縄北部農改普及センター資料</p>
+</section>
+
+<!-- ========== VEGETABLES SECTION ========== -->
+<section class="section" id="vegetables">
+  <div class="section-header">
+    <h2>🥬 野菜ガイド</h2>
+    <p>各野菜の栽培情報・栄養成分・栽培のコツ</p>
+  </div>
+  <div class="cat-filter" id="vegCatFilter">
+    <button class="cat-btn active" onclick="filterVeg('all',this)">すべて</button>
+    <button class="cat-btn" onclick="filterVeg('leaf',this)">🥬 葉菜</button>
+    <button class="cat-btn" onclick="filterVeg('fruit',this)">🍅 果菜</button>
+    <button class="cat-btn" onclick="filterVeg('root',this)">🥕 根菜</button>
+    <button class="cat-btn" onclick="filterVeg('stem',this)">🌱 茎菜</button>
+    <button class="cat-btn" onclick="filterVeg('bean',this)">🫛 豆類</button>
+    <button class="cat-btn" onclick="filterVeg('okina',this)">🏝 沖縄特産</button>
+  </div>
+  <div class="cards" id="vegCards"></div>
+</section>
+
+<!-- ========== ISLAND VEG SECTION ========== -->
+<section class="section" id="island">
+  <div class="section-header">
+    <h2>🏝️ 沖縄伝統野菜28品目</h2>
+    <p>戦前から受け継がれてきた「島野菜」― 沖縄の気候・風土に育まれた宝</p>
+  </div>
+  <div class="island-grid" id="islandGrid"></div>
+</section>
+
+<!-- ========== FRUITS SECTION ========== -->
+<section class="section" id="fruits">
+  <div class="section-header">
+    <h2>🍊 沖縄北部の果物・特産品</h2>
+    <p>やんばる地域を代表する果物の旬・産地情報</p>
+  </div>
+  <div class="fruit-cards" id="fruitCards"></div>
+</section>
+
+<!-- ========== NORTH SECTION ========== -->
+<section class="section" id="north">
+  <div class="section-header">
+    <h2>📍 地域別 主な農産物</h2>
+    <p>沖縄北部の市町村別特産品マップ</p>
+  </div>
+  <div class="north-area" id="northArea"></div>
+</section>
+
+<!-- ========== MANUAL SECTION ========== -->
+<section class="section" id="manual">
+  <div class="section-header">
+    <h2>📖 栽培マニュアル・参考リンク</h2>
+    <p>沖縄県・JAおきなわ・農改普及センターの公式資料</p>
+  </div>
+  <div class="manual-wrap" id="manualWrap"></div>
+</section>
+
+<!-- ========== MODAL ========== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalIfOutside(event)">
+  <div class="modal modal-relative" id="modalContent">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <p>🌿 やんばる農業ガイド　沖縄県北部農業情報</p>
+  <p style="margin-top:6px;">出典：<a href="https://www.pref.okinawa.jp/shigoto/nogyo/" target="_blank">沖縄県農林水産部</a>・<a href="https://www.ja-okinawa.or.jp/" target="_blank">JAおきなわ</a>・<a href="https://www.pref.okinawa.lg.jp/shigoto/shinkooroshi/1011519/1024246/1011542/1010385.html" target="_blank">北部農業改良普及センター</a></p>
+  <p style="margin-top:4px;">北部農改普及センター TEL: <a href="tel:0980522752">0980-52-2752</a></p>
+</footer>
+
+<script>
+// =========================================================
+// DATA
+// =========================================================
+
+const calData = [
+  // name, category, [months with codes: S=sow, P=plant, H=harvest, R=peak, Y=yearround]
+  // months: [1..12] value: ''=none, 'S'=sow, 'P'=plant, 'H'=harvest, 'R'=peak(harvest+), 'Y'=yearround, 'SP'=sow+plant
+  {name:'キャベツ', cat:'leaf', months:['','','','','','','','','S','S','S','S'],plant:['','','','','','','','','','P','P','P'],harvest:['R','R','R','R','R','R','','','','','',''],hint:'品種：はやどり・グリーンボール'},
+  {name:'ブロッコリー', cat:'leaf', months:['','','','','','','','S','S','S','S',''],plant:['','','','','','','','','P','P','P',''],harvest:['','R','R','R','R','','','','','','','H'],hint:'品種：緑帝・シャスター・ハイツ'},
+  {name:'カリフラワー', cat:'leaf', months:['','','','','','','','','S','S','S',''],plant:['','','','','','','','','','P','P',''],harvest:['H','H','H','H','','','','','','','',''],hint:''},
+  {name:'ハクサイ', cat:'leaf', months:['','','','','','','','','S','S','S',''],plant:['','','','','','','','','','P','P',''],harvest:['H','H','H','H','','','','','','','H','H'],hint:''},
+  {name:'コマツナ', cat:'leaf', months:['Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'],plant:[],harvest:[],hint:'周年栽培可能'},
+  {name:'チンゲンサイ', cat:'leaf', months:['Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'],plant:[],harvest:[],hint:'周年栽培可能'},
+  {name:'結球レタス', cat:'leaf', months:['','','','','','','','S','S','S','S',''],plant:['','','','','','','','','P','P','P','P'],harvest:['R','R','H','','','','','','','','',''],hint:''},
+  {name:'リーフレタス', cat:'leaf', months:['S','','','','','','','S','S','S','S','S'],plant:[],harvest:['H','H','H','H','','','','','','H','H','H'],hint:''},
+  {name:'モロヘイヤ', cat:'leaf', months:['','','','S','S','','','','','','',''],plant:[],harvest:['','','','','','H','R','R','R','H','H',''],hint:'主産地：沖縄全域'},
+  {name:'ホウレンソウ', cat:'leaf', months:['','','','','','','','','','S','S','S'],plant:[],harvest:['H','H','H','','','','','','','','H','H'],hint:''},
+  {name:'シュンギク', cat:'leaf', months:['S','','','','','','','','','S','S','S'],plant:[],harvest:['H','H','','','','','','','','','H','H'],hint:''},
+  {name:'ゴーヤー', cat:'okina', months:['','','S','S','','','','','','','',''],plant:['','','','P','P','','','','','','',''],harvest:['','','','','H','R','R','R','H','H','',''],hint:'沖縄代表野菜・北部名護市産'},
+  {name:'トマト', cat:'fruit', months:['','','','','','','','S','S','S','',''],plant:['','','','','','','','','P','P','P',''],harvest:['H','R','R','R','H','','','','','','',''],hint:'※沖縄では冬が旬！夏は収穫困難'},
+  {name:'ミニトマト', cat:'fruit', months:['','','','','','','','S','S','S','',''],plant:[],harvest:['H','R','R','H','H','','','','','','',''],hint:''},
+  {name:'カボチャ', cat:'fruit', months:['','S','S','S','','','','','','','',''],plant:['','','P','P','P','','','','','','',''],harvest:['','','','','R','R','H','','','','',''],hint:'沖縄産出荷量最多'},
+  {name:'ピーマン', cat:'fruit', months:['','','','','','','','S','S','','',''],plant:['','','','','','','','','','P','P',''],harvest:['H','H','H','H','H','','','','','','H','H'],hint:''},
+  {name:'キュウリ', cat:'fruit', months:['S','','','','','','','','','S','S',''],plant:['','','','','','','','','','','P','P'],harvest:['','H','R','H','','','','','','','',''],hint:'主産地：今帰仁村'},
+  {name:'ナス', cat:'fruit', months:['','','','','','','','','S','S','',''],plant:[],harvest:['','H','R','R','H','','','','','','',''],hint:''},
+  {name:'シシトウ', cat:'fruit', months:['','','','','','','','S','S','','',''],plant:[],harvest:['H','H','H','H','H','','','','','','','H'],hint:''},
+  {name:'トウガラシ', cat:'fruit', months:['','','','','','','','S','S','','',''],plant:[],harvest:['H','H','H','H','','','','','','','',''],hint:''},
+  {name:'スイカ', cat:'fruit', months:['S','S','','','','','','','','','S','S'],plant:['P','P','','','','','','','','','','P'],harvest:['','','','H','R','H','','','','','',''],hint:'主産地：今帰仁村'},
+  {name:'メロン', cat:'fruit', months:['S','S','','','','','','','','S','S',''],plant:[],harvest:['','','H','R','H','','','','','','',''],hint:''},
+  {name:'オクラ', cat:'fruit', months:['','','S','S','S','','','','','','',''],plant:[],harvest:['','','','','H','R','R','R','H','','',''],hint:'沖縄産出荷量2位'},
+  {name:'スイートコーン', cat:'bean', months:['S','S','','','','','','S','S','','',''],plant:[],harvest:['','','H','H','','','','','','H','H',''],hint:''},
+  {name:'エダマメ', cat:'bean', months:['','','S','S','S','','','','','','',''],plant:[],harvest:['','','','','H','H','H','H','','','',''],hint:''},
+  {name:'サヤインゲン', cat:'bean', months:['S','S','S','','','','','','S','S','S','S'],plant:[],harvest:['','H','R','H','','','','','','H','H','R'],hint:''},
+  {name:'ダイコン', cat:'root', months:['','','','','','','','','S','S','S',''],plant:[],harvest:['H','H','H','H','','','','','','','H','H'],hint:''},
+  {name:'ニンジン', cat:'root', months:['','','','','','','','S','S','S','',''],plant:[],harvest:['H','H','H','','','','','','','','',''],hint:'主産地：宜野座村・国頭村'},
+  {name:'カブ', cat:'root', months:['','','','','','','','','S','S','S',''],plant:[],harvest:['H','H','H','','','','','','','','H','H'],hint:''},
+  {name:'ジャガイモ', cat:'root', months:['','S','','','','','','','S','','',''],plant:[],harvest:['','','H','H','H','','','','','H','H',''],hint:'主産地：宜野座村'},
+  {name:'サツマイモ', cat:'root', months:['','','S','S','S','S','S','','','','',''],plant:[],harvest:['','','','','','','H','R','R','R','H',''],hint:''},
+  {name:'里芋（ターンム）', cat:'root', months:['','','S','S','','','','','','','',''],plant:[],harvest:['H','','','','','','','H','H','H','H','H'],hint:'沖縄伝統野菜・正月料理に必須'},
+  {name:'グリーンアスパラ', cat:'stem', months:['Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'],plant:[],harvest:[],hint:'周年収穫可能'},
+  {name:'セルリー', cat:'stem', months:['','','','','','','','S','S','S','',''],plant:['','','','','','','','','P','P','P',''],harvest:['H','H','H','H','','','','','','','',''],hint:''},
+  {name:'ナーベーラー', cat:'okina', months:['','','S','S','S','','','','','','',''],plant:[],harvest:['','','','','H','R','R','R','H','','',''],hint:'ヘチマ・主産地：糸満・南部'},
+  {name:'ウンチェー(空心菜)', cat:'okina', months:['','','','S','S','S','','','','','',''],plant:[],harvest:['','','','','H','R','R','R','R','H','',''],hint:'鉄分・ビタミンA豊富'},
+  {name:'モーウイ', cat:'okina', months:['','','S','S','','','','','','','',''],plant:[],harvest:['','','','','','H','R','H','','','',''],hint:'沖縄の赤毛瓜'},
+  {name:'シブイ(冬瓜)', cat:'okina', months:['','','','S','S','','','','','','',''],plant:[],harvest:['','','','','','H','R','R','H','','',''],hint:'ビタミンC豊富'},
+  {name:'野菜パパイヤ', cat:'okina', months:['S','S','S','','','','','','','','',''],plant:[],harvest:['','','','H','R','R','R','R','R','R','',''],hint:'パパイン酵素含む'},
+  {name:'サクナ(長命草)', cat:'okina', months:['Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'],plant:[],harvest:[],hint:'カロテン・ビタミンC豊富'},
+  {name:'フーチバー', cat:'okina', months:['Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'],plant:[],harvest:[],hint:'ヨモギ・薬草'},
+  {name:'シマナー(カラシナ)', cat:'okina', months:['','','','','','','','','S','S','S','S'],plant:[],harvest:['H','H','H','H','','','','','','','H','H'],hint:'チキナー（塩漬け）に'},
+  {name:'島らっきょう', cat:'okina', months:['','','','','','','','S','S','S','',''],plant:[],harvest:['H','H','H','H','','','','','','','',''],hint:'天ぷら・漬物'},
+  {name:'ハンダマ', cat:'okina', months:['Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y','Y'],plant:[],harvest:[],hint:'ポリフェノール豊富・不老長寿の葉'},
+  {name:'シカクマメ', cat:'okina', months:['','','','S','S','S','','','','','',''],plant:[],harvest:['','','','','','H','R','R','H','','',''],hint:'ビタミンA・C・マグネシウム'},
+  {name:'さとうきび', cat:'okina', months:['','','S','S','S','','','','','','',''],plant:[],harvest:['H','H','H','','','','','','','','',''],hint:'12月〜3月収穫・北部全域産'},
+];
+
+const vegData = [
+  {name:'キャベツ', emoji:'🥬', cat:'leaf', ph:'6.0-6.5', sowSeason:'9〜3月', harvestSeason:'12〜6月', days:'100-120日', area:'本部町・糸満市',
+   nutrients:['ビタミンB6','ビタミンC','ビタミンE','ビタミンU','ビタミンK','ペルオキシターゼ'],
+   varieties:['はやどり','グリーンボール'],
+   germinateTemp:'15-20°C', growTemp:'15-20°C（最高20°C）',
+   tips:'土壌適応性が高く、やんばるでは秋〜春に栽培。石灰で土壌を調整してから植え付けを。'},
+  {name:'ブロッコリー', emoji:'🥦', cat:'leaf', ph:'5.5-6.5', sowSeason:'8〜12月', harvestSeason:'11〜4月', days:'90日', area:'沖縄全域',
+   nutrients:['ビタミンA','ビタミンB2','ビタミンC','鉄分','食物繊維'],
+   varieties:['緑帝','シャスター','ハイツ','グリーンコメット'],
+   germinateTemp:'約25°C', growTemp:'15-20°C（最高25°C）',
+   tips:'高温に弱いため、定植は涼しくなってから。直播きより育苗移植が確実。'},
+  {name:'カリフラワー', emoji:'🌸', cat:'leaf', ph:'6.0-7.0', sowSeason:'9〜12月', harvestSeason:'1〜4月', days:'90-120日', area:'沖縄全域',
+   nutrients:['ビタミンC','ビタミンK','食物繊維','葉酸'],
+   varieties:['スノークラウン','早生フォーレスト'],
+   germinateTemp:'15-20°C', growTemp:'15-22°C',
+   tips:'花蕾が大きくなったら葉で覆い白くなるよう遮光する（ブランチング）。'},
+  {name:'ハクサイ', emoji:'🥬', cat:'leaf', ph:'6.0-7.0', sowSeason:'9〜11月', harvestSeason:'12〜4月', days:'90-100日', area:'沖縄全域',
+   nutrients:['ビタミンC','カルシウム','カリウム','葉酸'],
+   varieties:['無双','耐病60日'],
+   germinateTemp:'15-20°C', growTemp:'15-20°C',
+   tips:'高温多湿に弱い。軟腐病対策として過湿に注意し、水はけよく管理。'},
+  {name:'コマツナ', emoji:'🌿', cat:'leaf', ph:'5.5-6.8', sowSeason:'周年', harvestSeason:'周年', days:'30-40日', area:'沖縄全域',
+   nutrients:['カルシウム','鉄分','ビタミンA','ビタミンC','葉酸'],
+   varieties:['黒錦','のぼり旗'],
+   germinateTemp:'15-33°C', growTemp:'15-30°C',
+   tips:'沖縄では周年栽培可能。夏は遮光ネットで高温を緩和。短期収穫できる初心者向き野菜。'},
+  {name:'チンゲンサイ', emoji:'🥬', cat:'leaf', ph:'6.0-7.0', sowSeason:'周年', harvestSeason:'周年', days:'30-40日', area:'沖縄全域',
+   nutrients:['カロテン','ビタミンC','カルシウム','カリウム'],
+   varieties:['長崎青茎','緑光'],
+   germinateTemp:'15-30°C', growTemp:'15-25°C',
+   tips:'沖縄では周年栽培可能。過湿に注意し、適切な間引きで株を育てる。'},
+  {name:'結球レタス', emoji:'🥬', cat:'leaf', ph:'6.0-7.0', sowSeason:'8〜2月', harvestSeason:'11〜4月', days:'60-80日', area:'沖縄全域',
+   nutrients:['ビタミンA','ビタミンK','葉酸','カリウム'],
+   varieties:['シスコ','バークレー'],
+   germinateTemp:'18-20°C', growTemp:'13-18°C',
+   tips:'高温時は発芽率が低下。予冷処理（冷蔵庫で2日）で発芽揃いが良くなる。'},
+  {name:'リーフレタス', emoji:'🥗', cat:'leaf', ph:'6.0-7.0', sowSeason:'8〜3月', harvestSeason:'10〜5月', days:'40-60日', area:'沖縄全域',
+   nutrients:['ビタミンA','ビタミンK','葉酸'],
+   varieties:['サニーレタス','グリーンリーフ'],
+   germinateTemp:'18-20°C', growTemp:'13-20°C',
+   tips:'外葉から収穫できる「掻き取り収穫」で長期収穫可能。'},
+  {name:'モロヘイヤ', emoji:'🌿', cat:'leaf', ph:'6.0-6.8', sowSeason:'4〜5月', harvestSeason:'6〜11月', days:'約60日', area:'沖縄全域',
+   nutrients:['ビタミンA（β-カロテン）','ビタミンB群','ビタミンC','カルシウム','鉄分','食物繊維'],
+   varieties:['一般品種'],
+   germinateTemp:'25-30°C', growTemp:'25-35°C',
+   tips:'暑さに強く、やんばるの夏に最適。茎葉が20〜30cmになったら摘心し、側枝を収穫。'},
+  {name:'ゴーヤー', emoji:'🫑', cat:'okina', ph:'6.0-6.5', sowSeason:'3〜4月（定植）', harvestSeason:'5〜10月', days:'播種後100-120日', area:'名護市・南城市・宜野座村',
+   nutrients:['ビタミンC（加熱しても壊れにくい）','葉酸','カリウム'],
+   varieties:['アバシゴーヤー','長れいし','夏優'],
+   germinateTemp:'25-30°C', growTemp:'25-30°C',
+   tips:'沖縄の代表的野菜。北部での主産地は名護市。ネットに絡ませる誘引栽培。苦み成分はモモルデシン。県特別栽培マニュアルあり。'},
+  {name:'トマト', emoji:'🍅', cat:'fruit', ph:'6.0-6.5', sowSeason:'8〜2月', harvestSeason:'11〜5月', days:'90-120日', area:'宮古島・うるま市・名護市',
+   nutrients:['リコピン','ビタミンC','ビタミンE','カリウム','葉酸'],
+   varieties:['桃太郎','アイコ','麗夏'],
+   germinateTemp:'25-30°C', growTemp:'15-25°C',
+   tips:'※沖縄では秋蒔き冬収穫が基本！本土と逆で収穫は11〜5月。夏の高温では着果しにくい。県特別栽培マニュアルあり。'},
+  {name:'カボチャ', emoji:'🎃', cat:'fruit', ph:'5.5-6.8', sowSeason:'2〜4月', harvestSeason:'5〜7月', days:'90-120日', area:'糸満市・うるま市・沖縄全域',
+   nutrients:['ビタミンA','ビタミンB1','ビタミンC','β-カロテン','食物繊維'],
+   varieties:['打木赤皮甘栗','九重栗','エビス'],
+   germinateTemp:'25-30°C', growTemp:'20-25°C',
+   tips:'沖縄からの出荷量は全国最多クラス。2〜5月播種、5〜8月収穫。県特別栽培マニュアルあり。'},
+  {name:'ピーマン', emoji:'🫑', cat:'fruit', ph:'6.0-6.8', sowSeason:'8〜9月', harvestSeason:'11〜6月', days:'120-150日', area:'沖縄全域',
+   nutrients:['ビタミンC（豊富）','ビタミンA','ビタミンE','カリウム'],
+   varieties:['京鈴','エース','翠星'],
+   germinateTemp:'25-30°C', growTemp:'20-30°C',
+   tips:'沖縄では秋定植で越冬収穫。高温に強く長期収穫できる。県特別栽培マニュアルあり。'},
+  {name:'キュウリ', emoji:'🥒', cat:'fruit', ph:'5.5-7.0', sowSeason:'10〜11月', harvestSeason:'2〜5月', days:'60-80日', area:'今帰仁村・糸満市・南風原町',
+   nutrients:['カリウム','ビタミンC','食物繊維','シリカ'],
+   varieties:['夏すずみ','北進','シャープ1号'],
+   germinateTemp:'25-30°C', growTemp:'22-28°C',
+   tips:'北部では今帰仁村が主産地。秋蒔き冬定植で、2〜5月に出荷ピーク。県特別栽培マニュアルあり。'},
+  {name:'スイカ', emoji:'🍉', cat:'fruit', ph:'5.0-6.5', sowSeason:'11〜1月', harvestSeason:'4〜6月', days:'90-120日', area:'今帰仁村（北部最大産地）',
+   nutrients:['リコピン','β-カロテン','シトルリン','カリウム','ビタミンC'],
+   varieties:['縞王','春の輝き','紅大'],
+   germinateTemp:'30-35°C', growTemp:'25-30°C',
+   tips:'今帰仁村はスイカの一大産地。高温多湿を嫌うため水はけの良い土壌が重要。4〜5月出荷ピーク。'},
+  {name:'オクラ', emoji:'🌱', cat:'fruit', ph:'6.0-6.8', sowSeason:'3〜5月', harvestSeason:'5〜10月', days:'60-70日', area:'沖縄全域',
+   nutrients:['ムチン（ネバネバ成分）','ペクチン','β-カロテン','ビタミンC','カルシウム','鉄分'],
+   varieties:['グリーンスター','アーリーファイブ'],
+   germinateTemp:'25-30°C', growTemp:'25-30°C',
+   tips:'沖縄産出荷量全国2位。高温を好み夏季に旺盛生育。花後5〜7日で収穫適期（5〜8cm）。県特別栽培マニュアルあり。'},
+  {name:'ナス', emoji:'🍆', cat:'fruit', ph:'6.0-6.8', sowSeason:'9〜10月', harvestSeason:'2〜5月', days:'120日', area:'沖縄全域',
+   nutrients:['ナスニン（ポリフェノール）','クロロゲン酸','カリウム','食物繊維'],
+   varieties:['千両2号','とげなし千両2号'],
+   germinateTemp:'25-30°C', growTemp:'22-30°C',
+   tips:'沖縄では秋に定植し、越冬収穫。高温多湿に比較的強い。'},
+  {name:'ダイコン', emoji:'🫚', cat:'root', ph:'6.0-7.0', sowSeason:'9〜11月', harvestSeason:'12〜4月', days:'60-80日', area:'沖縄全域',
+   nutrients:['ジアスターゼ（消化酵素）','ビタミンC','カリウム','食物繊維'],
+   varieties:['春まさり','冬自慢'],
+   germinateTemp:'15-25°C', growTemp:'15-20°C',
+   tips:'深くやわらかく耕し、石を除去してから播種する。沖縄では晩秋から春が栽培適期。'},
+  {name:'ニンジン', emoji:'🥕', cat:'root', ph:'6.0-7.0', sowSeason:'8〜10月', harvestSeason:'3〜4月', days:'120-150日', area:'宜野座村・国頭村（北部主産地）',
+   nutrients:['β-カロテン（豊富）','ビタミンK','カリウム','食物繊維'],
+   varieties:['向陽2号','ひとみ五寸'],
+   germinateTemp:'15-25°C', growTemp:'15-20°C',
+   tips:'北部では宜野座村・国頭村が主産地。3〜4月に出荷ピーク。県特別栽培マニュアルあり（沖縄向け品種選択が重要）。'},
+  {name:'ジャガイモ', emoji:'🥔', cat:'root', ph:'4.5-5.5', sowSeason:'9月・2月', harvestSeason:'4〜5月・11〜12月', days:'90-110日', area:'宜野座村・沖縄全域',
+   nutrients:['ビタミンC（加熱に強い）','カリウム','食物繊維'],
+   varieties:['農林1号','出島'],
+   germinateTemp:'10-20°C', growTemp:'15-20°C',
+   tips:'沖縄では年2作可能。春作（2月植付・6月収穫）と秋作（9月植付・12月収穫）。酸性土壌を好む。'},
+  {name:'サツマイモ', emoji:'🍠', cat:'root', ph:'5.5-6.5', sowSeason:'3〜7月', harvestSeason:'8〜11月', days:'120-150日', area:'沖縄全域',
+   nutrients:['β-カロテン（紅イモ）','ビタミンC','カリウム','食物繊維','アントシアニン（紅イモ）'],
+   varieties:['ベニアズマ','高系14号','沖縄100号（紅イモ）'],
+   germinateTemp:'25-30°C', growTemp:'22-30°C',
+   tips:'紅イモは沖縄の特産品。蔓苗を斜め挿しで定植。収穫後は低温障害に注意し13℃以上で保管。'},
+  {name:'グリーンアスパラガス', emoji:'🌱', cat:'stem', ph:'6.0-7.0', sowSeason:'周年', harvestSeason:'周年', days:'植付から1.5-2年', area:'沖縄全域',
+   nutrients:['アスパラギン酸','ルチン','葉酸','ビタミンC','カリウム'],
+   varieties:['ウェルカム','スーパーウェルカム'],
+   germinateTemp:'25-30°C', growTemp:'15-25°C',
+   tips:'一度植えれば周年収穫できる多年草。やんばるでは露地栽培が可能。'},
+  {name:'セルリー', emoji:'🌿', cat:'stem', ph:'6.0-7.0', sowSeason:'8〜10月', harvestSeason:'1〜4月', days:'120-150日', area:'沖縄全域',
+   nutrients:['ビタミンC','カリウム','カルシウム','食物繊維','アピイン'],
+   varieties:['コーネル619','ユタ'],
+   germinateTemp:'15-20°C', growTemp:'15-20°C',
+   tips:'冷涼を好むため沖縄では秋に播種。軟化処理（株元を遮光）で白くやわらかく育てる。'},
+  {name:'エダマメ', emoji:'🫘', cat:'bean', ph:'5.5-6.5', sowSeason:'3〜5月', harvestSeason:'6〜8月', days:'70-90日', area:'沖縄全域',
+   nutrients:['タンパク質','イソフラボン','葉酸','ビタミンB1','鉄分'],
+   varieties:['湯あがり娘','サッポロミドリ'],
+   germinateTemp:'25-30°C', growTemp:'20-30°C',
+   tips:'莢が膨らんで実が充実したタイミングで収穫。収穫後は品質低下が早いので早めに茹でる。'},
+  {name:'サヤインゲン', emoji:'🫘', cat:'bean', ph:'6.0-6.8', sowSeason:'周年', harvestSeason:'周年', days:'50-70日', area:'沖縄全域',
+   nutrients:['タンパク質','カロテン','ビタミンC','カルシウム','食物繊維'],
+   varieties:['つるなし品種','ケンタッキー'],
+   germinateTemp:'20-25°C', growTemp:'18-25°C',
+   tips:'沖縄では周年栽培ができる。開花後7〜10日で収穫適期。過熟は繊維が硬くなるため早めに。県特別栽培マニュアルあり。'},
+  {name:'スイートコーン', emoji:'🌽', cat:'bean', ph:'5.5-6.5', sowSeason:'1〜3月・8〜9月', harvestSeason:'4〜6月・10〜11月', days:'75-90日', area:'沖縄全域',
+   nutrients:['食物繊維','ビタミンB群','カリウム','亜鉛'],
+   varieties:['ゴールドラッシュ','ピーターコーン'],
+   germinateTemp:'25-30°C', growTemp:'23-30°C',
+   tips:'やんばるでは春作（1月播種）と秋作（8月播種）の2作が可能。絹糸（ひげ）が茶色く乾燥したら収穫適期。'},
+];
+
+const islandVegData = [
+  {name:'ゴーヤー', yomi:'にがうり', emoji:'🫑', season:'夏', badge:'badge-summer',
+   nameWa:'にがうり', family:'ウリ科', nutrients:'ビタミンC（加熱でも壊れにくい）・葉酸・カリウム',
+   cooking:'ゴーヤーチャンプルー・天ぷら・酢の物・漬物',
+   desc:'沖縄を代表する夏野菜。つぶつぶが大きいほど苦みが少ない。塩もみすると苦みが和らぐ。'},
+  {name:'野菜パパイヤ', yomi:'パパヤ', emoji:'🟡', season:'夏〜秋', badge:'badge-summer',
+   nameWa:'パパイヤ（未熟果）', family:'パパイヤ科', nutrients:'パパイン酵素・ビタミンC・カリウム',
+   cooking:'パパイヤシリシリー・イリチー・炒め物・サラダ',
+   desc:'緑色のうちに収穫して野菜として利用。流水にさらしてアク抜きをすると食べやすい。'},
+  {name:'シブイ', yomi:'とうがん（冬瓜）', emoji:'🟢', season:'夏', badge:'badge-summer',
+   nameWa:'とうがん', family:'ウリ科', nutrients:'ビタミンC・カリウム・利尿作用',
+   cooking:'汁物・煮物・あんかけ・砂糖漬け',
+   desc:'夏に収穫して冬まで保存できる（冬瓜の名の由来）。沖縄のゴーヤーと並ぶ夏野菜の横綱。'},
+  {name:'シカクマメ', yomi:'しかくまーみ', emoji:'🫛', season:'夏', badge:'badge-summer',
+   nameWa:'しかくまめ', family:'マメ科', nutrients:'ビタミンA・C・マグネシウム',
+   cooking:'サラダ・揚げ物・炒め物・煮物',
+   desc:'断面が四角でコリコリした食感。先端が緑の青々としたものを選ぶ。'},
+  {name:'ウンチェー', yomi:'えんさい・空心菜', emoji:'🌿', season:'夏', badge:'badge-summer',
+   nameWa:'ようさい（空心菜）', family:'ヒルガオ科', nutrients:'鉄分・ビタミンA・葉酸・ビタミンB2・C・E',
+   cooking:'炒め物・汁物・和え物',
+   desc:'茎が空洞になっているシャキシャキした食感が特徴。傷みやすいので早めに使うこと。'},
+  {name:'ナーベーラー', yomi:'へちま', emoji:'🟫', season:'夏', badge:'badge-summer',
+   nameWa:'へちま（いとうり）', family:'ウリ科', nutrients:'ビタミンK・ビタミンB群・ビタミンC・食物繊維',
+   cooking:'みそ煮・炒め物・汁物',
+   desc:'ゴーヤーと並ぶ夏野菜の横綱。開花から約2週間の若い実を食用に。滑らかな食感とまろやかな甘味。'},
+  {name:'モーウイ', yomi:'あかもうい', emoji:'🔴', season:'夏', badge:'badge-summer',
+   nameWa:'赤毛瓜', family:'ウリ科', nutrients:'ビタミンC・カリウム',
+   cooking:'みそ煮・漬物・汁物',
+   desc:'果皮が赤茶色で、一般的なきゅうりとは異なる。青臭さがなく味がしまっている。'},
+  {name:'シマナー', yomi:'からしな', emoji:'🌿', season:'通年', badge:'badge-yearround',
+   nameWa:'からしな', family:'アブラナ科', nutrients:'ビタミンA・C・葉酸・鉄分・カルシウム',
+   cooking:'塩漬け（チキナー）・おひたし・炒め物・汁物',
+   desc:'独特の辛味が特徴。塩漬けにしたものを「チキナー」という。湯通しすると辛みが和らぐ。'},
+  {name:'サクナ', yomi:'長命草・ぼたんぼうふう', emoji:'🌿', season:'通年', badge:'badge-yearround',
+   nameWa:'ぼたんぼうふう', family:'セリ科', nutrients:'カロテン・ビタミンC・カルシウム',
+   cooking:'天ぷら・和え物・魚汁や山羊汁の臭い消し',
+   desc:'「長命草」とも呼ばれる。葉が肉厚で独特の香りあり。八重山地域では薬草として珍重。'},
+  {name:'フーチバー', yomi:'よもぎ', emoji:'🍵', season:'通年', badge:'badge-yearround',
+   nameWa:'ニシヨモギ（よもぎ）', family:'キク科', nutrients:'ビタミンA・カリウム・カルシウム・鉄分',
+   cooking:'ジューシー（炊き込みご飯）・肉汁・ヤギ汁の臭い消し・薬味',
+   desc:'本土のヨモギより苦みがやわらか。古くから薬草として使用。'},
+  {name:'イーチョーバー', yomi:'うんきょう・フェンネル', emoji:'🌱', season:'通年', badge:'badge-yearround',
+   nameWa:'ウィキョウ（フェンネル）', family:'セリ科', nutrients:'ビタミンC・カリウム・食物繊維',
+   cooking:'魚汁の臭い消し・炒め物・薬味',
+   desc:'独特の甘い香りが特徴。魚料理の臭い消しに欠かせないハーブ。'},
+  {name:'クワンソウ', yomi:'わすれぐさ', emoji:'🌸', season:'通年', badge:'badge-yearround',
+   nameWa:'わすれぐさ', family:'ユリ科', nutrients:'ビタミンA・食物繊維・ミネラル',
+   cooking:'炒め物・和え物・汁物・天ぷら',
+   desc:'昔から「眠れる草」として民間薬に使われてきた。蕾を食用にする。'},
+  {name:'ハンダマ', yomi:'はんだま', emoji:'🟣', season:'通年', badge:'badge-yearround',
+   nameWa:'水前寺菜', family:'キク科', nutrients:'ビタミンA・B2・鉄分・ポリフェノール',
+   cooking:'和え物・汁物・雑炊（ジューシー）',
+   desc:'「血の葉・不老長寿の葉」と呼ばれる。茹でると鮮やかな紫色が出る。'},
+  {name:'カンダバー', yomi:'かんだばー', emoji:'🍠', season:'通年', badge:'badge-yearround',
+   nameWa:'さつまいもの葉・蔓（蔓菜）', family:'ヒルガオ科', nutrients:'ビタミンC・A・B1・B2・食物繊維',
+   cooking:'汁物・煮物・炒め物・ジューシー（雑炊）',
+   desc:'サツマイモの葉・茎。ジューシー（雑炊）に入れると絶品。クセが少なく食べやすい。'},
+  {name:'ニガナ', yomi:'にがな', emoji:'🌿', season:'通年', badge:'badge-yearround',
+   nameWa:'にがな', family:'キク科', nutrients:'ビタミンA・C・カルシウム・鉄分',
+   cooking:'青汁・汁物・和え物',
+   desc:'琉球王朝時代から風邪予防に利用。強い苦味があり冷水にさらしてから食べる。'},
+  {name:'島らっきょう', yomi:'しまらっきょう', emoji:'🧅', season:'冬〜春', badge:'badge-winter',
+   nameWa:'らっきょう（在来種）', family:'ユリ科', nutrients:'アリシン・ビタミンB1・食物繊維',
+   cooking:'塩もみ浅漬け・天ぷら・炒め物',
+   desc:'香りと辛味が強い沖縄在来種。本土のより小ぶり。疲労回復・殺菌効果。'},
+  {name:'葉ニンニク', yomi:'はにんにく', emoji:'🌿', season:'冬〜春', badge:'badge-winter',
+   nameWa:'葉にんにく', family:'ユリ科', nutrients:'アリシン・ビタミンB6・C',
+   cooking:'炒め物・薬味',
+   desc:'ニンニクの芽とは異なる野菜。15世紀から食されている伝統野菜。炒め物に利用が多い。'},
+  {name:'島ニンジン', yomi:'しまにんじん', emoji:'🟡', season:'冬〜春', badge:'badge-winter',
+   nameWa:'島人参（黄色い在来種）', family:'セリ科', nutrients:'β-カロテン（豊富）・ビタミンK・ミネラル',
+   cooking:'汁物（中身汁）・シリシリー・炒め物',
+   desc:'黄色い在来種のニンジン。滋養食として古くから珍重。油と一緒に調理するとβ-カロテン吸収が向上。'},
+  {name:'島ダイコン', yomi:'しまだいこん', emoji:'⬜', season:'冬', badge:'badge-winter',
+   nameWa:'島大根（在来種）', family:'アブラナ科', nutrients:'ビタミンC・消化酵素・カリウム',
+   cooking:'肉汁・なます・炒め物',
+   desc:'沖縄在来種のダイコン。冬が旬で正月や年越し料理に使われる。'},
+  {name:'紅イモ（ムラサキイモ）', yomi:'べにいも', emoji:'🟣', season:'秋', badge:'badge-root',
+   nameWa:'紅イモ（紫さつまいも）', family:'ヒルガオ科', nutrients:'アントシアニン（豊富）・ビタミンC・A・カリウム',
+   cooking:'タルト・蒸しイモ・天ぷら・チップス・羊羹',
+   desc:'戦後の沖縄の食を支えた作物。アントシアニンが豊富で鮮やかな紫色。お菓子に幅広く使用。'},
+  {name:'ターンム（里芋）', yomi:'たーんむ', emoji:'🟤', season:'周年', badge:'badge-root',
+   nameWa:'里芋（田芋）', family:'サトイモ科', nutrients:'カルシウム・カリウム・ビタミンA・C・鉄分',
+   cooking:'ターンムの煮物・ドゥルワカシー・正月料理',
+   desc:'沖縄の正月・お盆に欠かせない。水田や湿地で栽培される「田芋」。ドゥルワカシー（お祝い料理）に必須。'},
+  {name:'ヤマン', yomi:'やまいも・ぬふぁーいも', emoji:'🟫', season:'秋〜冬', badge:'badge-root',
+   nameWa:'沖縄ヤマイモ（在来大薯）', family:'ヤマノイモ科', nutrients:'ムチン・ジアスターゼ・カリウム',
+   cooking:'天ぷら・煮つけ・すりおろし',
+   desc:'一株100kgにもなる巨大イモ。沖縄各地で大きさを競う大会が毎年開催される。'},
+  {name:'フーロー豆', yomi:'ふーろーまめ', emoji:'🫘', season:'夏', badge:'badge-summer',
+   nameWa:'藤豆（たちなた豆）', family:'マメ科', nutrients:'タンパク質・ビタミンB1・鉄分',
+   cooking:'赤飯・煮物・炒め物',
+   desc:'暑さ・病害虫に強く育てやすい夏野菜。乾燥させると皮が硬くなり胴割れしないため祝いの赤飯にも。'},
+  {name:'オオタニワタリ', yomi:'おおたにわたり', emoji:'🌿', season:'通年', badge:'badge-yearround',
+   nameWa:'オオタニワタリ', family:'チャセンシダ科', nutrients:'ビタミンC・カリウム・食物繊維',
+   cooking:'炒め物・煮物・天ぷら',
+   desc:'葉の長さが1m以上になるシダ植物の新芽を食用に。八重山では祭事にも使われる。'},
+  {name:'チシャナバー（シチャナバー）', yomi:'しちゃなばー', emoji:'🥬', season:'通年', badge:'badge-leaf',
+   nameWa:'かきチシャ', family:'キク科', nutrients:'ビタミンA・C・カリウム',
+   cooking:'油炒め・みそ汁',
+   desc:'草丈1m近くになる立ち性のレタス類。掻き取りながら収穫する。生食より加熱調理に向く。'},
+  {name:'ンスナバー', yomi:'んすなばー・不断草', emoji:'🌿', season:'通年', badge:'badge-yearround',
+   nameWa:'不断草（ふだんそう）', family:'アカザ科', nutrients:'カリウム・カルシウム・食物繊維',
+   cooking:'スープ・煮込み・炒め物',
+   desc:'「不断草」とも呼ばれ、絶えず葉が生え続ける。戦後の食料難の時代に重宝された強靱な野菜。'},
+  {name:'ノビル', yomi:'のびる', emoji:'⚪', season:'春', badge:'badge-leaf',
+   nameWa:'野蒜（のびる）', family:'ユリ科', nutrients:'アリシン・ビタミンB6',
+   cooking:'天ぷら・酢味噌和え',
+   desc:'ニンニクとラッキョウを足したような味。春が旬で沖縄では天ぷらや酢味噌和えにするのが一般的。'},
+  {name:'島カボチャ', yomi:'しまかぼちゃ', emoji:'🎃', season:'夏〜秋', badge:'badge-fruit',
+   nameWa:'沖縄在来カボチャ', family:'ウリ科', nutrients:'ビタミンA・B1・C・β-カロテン',
+   cooking:'炒め物・煮物・汁物',
+   desc:'沖縄在来種のカボチャ。暑さや病害虫に強く、貯蔵野菜としても重宝される。'},
+];
+
+const fruitData = [
+  {name:'タンカン', emoji:'🍊', season:'1月〜2月', area:'本島北部（やんばる）全域', peak:'1月〜2月上旬',
+   nutrients:'ビタミンC・β-カロテン・フラボノイド', desc:'沖縄北部を代表する柑橘。温暖なやんばる地域で栽培される冬の味覚。甘さ濃厚。タンジェリンとネーブルオレンジの自然交配種。',
+   tips:'収穫後も追熟で甘みが増す。2月上旬がもっとも甘い。'},
+  {name:'シークワーサー', emoji:'🍋', season:'8月（青切）〜2月（完熟）', area:'本島北部地区・大宜味村・今帰仁村', peak:'8〜9月（青切り）・10〜12月（加工用）・1〜2月（果実用）',
+   nutrients:'ノビレチン（ポリフェノール）・ビタミンC・クエン酸', desc:'北部を代表する柑橘。青切りはジュース・調味料として、完熟はフルーツとして利用。ノビレチンは認知症予防効果の研究がある。',
+   tips:'8〜9月は青切りで収穫し、酢の代わりに刺身やそばにかけて使う。'},
+  {name:'パインアップル', emoji:'🍍', season:'4月〜7月', area:'東村・名護市・石垣島', peak:'6〜7月',
+   nutrients:'ブロメライン（酵素）・ビタミンC・B1・マンガン', desc:'東村はパイン栽培で有名。糖度が高くジューシーな沖縄産パイン。生で食べるほか缶詰・ジュース加工にも。',
+   tips:'葉が青々として香りが強いものが新鮮。常温で追熟できる。'},
+  {name:'スイカ', emoji:'🍉', season:'4月〜6月', area:'今帰仁村（北部最大産地）', peak:'5月',
+   nutrients:'リコピン・シトルリン・β-カロテン・カリウム', desc:'今帰仁村はスイカの一大産地。本土より早い4〜5月に出荷ピーク。水分が多くリコピンが豊富。',
+   tips:'皮が緑で縞模様がはっきりしているもの、叩いてよく響くものが食べ頃。'},
+  {name:'バナナ', emoji:'🍌', season:'周年（特に8〜12月）', area:'今帰仁村・豊見城市・糸満市', peak:'9〜10月',
+   nutrients:'カリウム・マグネシウム・ビタミンB6・食物繊維', desc:'沖縄産バナナは独特の濃厚な甘みが特徴。今帰仁村でも栽培されている。島バナナは香りが強くとくに美味。',
+   tips:'黒い斑点（シュガースポット）が出たら完熟で最もおいしい。'},
+  {name:'アセロラ', emoji:'🍒', season:'5月〜9月', area:'本部町（国内最大産地）', peak:'5〜6月',
+   nutrients:'ビタミンC（レモンの17倍）・β-カロテン・アントシアニン', desc:'本部町は国内アセロラの一大産地。ビタミンCはレモンの約17倍含まれる。生食は産地でしか味わえない希少品。',
+   tips:'生のアセロラは非常に傷みやすく、産地でのみ生食が楽しめる。'},
+  {name:'マンゴー', emoji:'🥭', season:'6月〜8月', area:'宮古島・糸満市・名護市', peak:'6〜7月',
+   nutrients:'β-カロテン・ビタミンC・E・食物繊維', desc:'沖縄産アップルマンゴーは甘味と香りが強い。やんばる地域でも栽培が増加中。',
+   tips:'縦にヘタが凹んでいて、全体がオレンジ〜赤色になったら食べ頃。'},
+  {name:'さとうきび', emoji:'🎋', season:'12月〜3月（収穫期）', area:'沖縄全域・北部全域', peak:'1〜2月（糖度最高）',
+   nutrients:'スクロース・ミネラル・鉄分・カルシウム', desc:'沖縄の農地面積の約半分を占める主要作物。収穫期は12月〜3月。北部でも広く栽培され、やんばるの冬の風物詩。黒糖に加工。',
+   tips:'収穫後すぐに搾汁・加工するほど新鮮でおいしい黒糖になる。'},
+];
+
+const northAreaData = [
+  {area:'今帰仁村', products:[
+    {name:'スイカ', emoji:'🍉', detail:'4〜6月出荷・北部最大産地'},
+    {name:'キュウリ', emoji:'🥒', detail:'2〜4月出荷'},
+    {name:'バナナ', emoji:'🍌', detail:'周年収穫'},
+    {name:'シークワーサー', emoji:'🍋', detail:'8月〜2月'},
+  ]},
+  {area:'名護市', products:[
+    {name:'ゴーヤー', emoji:'🫑', detail:'5〜10月出荷'},
+    {name:'タンカン', emoji:'🍊', detail:'1〜2月・北部全域'},
+    {name:'さとうきび', emoji:'🎋', detail:'12〜3月収穫'},
+    {name:'マンゴー', emoji:'🥭', detail:'6〜8月・栽培増加中'},
+  ]},
+  {area:'東村', products:[
+    {name:'パインアップル', emoji:'🍍', detail:'4〜7月出荷・村の特産'},
+    {name:'さとうきび', emoji:'🎋', detail:'12〜3月収穫'},
+    {name:'ニンジン', emoji:'🥕', detail:'3〜4月出荷'},
+  ]},
+  {area:'国頭村・大宜味村', products:[
+    {name:'シークワーサー', emoji:'🍋', detail:'大宜味産が有名・8月〜2月'},
+    {name:'タンカン', emoji:'🍊', detail:'1〜2月'},
+    {name:'ニンジン', emoji:'🥕', detail:'3〜4月出荷'},
+    {name:'さとうきび', emoji:'🎋', detail:'12〜3月収穫'},
+  ]},
+  {area:'宜野座村', products:[
+    {name:'ニンジン', emoji:'🥕', detail:'3〜4月出荷・主産地'},
+    {name:'ジャガイモ', emoji:'🥔', detail:'4〜5月・11〜12月'},
+    {name:'ササゲ', emoji:'🫘', detail:'冬〜春'},
+    {name:'さとうきび', emoji:'🎋', detail:'12〜3月収穫'},
+  ]},
+  {area:'本部町', products:[
+    {name:'アセロラ', emoji:'🍒', detail:'5〜9月・国内最大産地'},
+    {name:'キャベツ', emoji:'🥬', detail:'12〜5月'},
+    {name:'タンカン', emoji:'🍊', detail:'1〜2月'},
+    {name:'さとうきび', emoji:'🎋', detail:'12〜3月収穫'},
+  ]},
+];
+
+const manualData = [
+  {category:'🌿 基礎技術・環境保全型農業', items:[
+    {name:'特別栽培農産物栽培マニュアル（基礎技術編：土づくり・病害虫管理）', url:'https://www.pref.okinawa.lg.jp/shigoto/nogyo/1010362/1010676/1010680.html'},
+    {name:'沖縄県特別栽培農産物認証制度', url:'https://www.pref.okinawa.lg.jp/shigoto/nogyo/1010362/1010676/1010679.html'},
+    {name:'環境保全型農業について', url:'https://www.pref.okinawa.lg.jp/shigoto/nogyo/1010362/1010676/1023472.html'},
+  ]},
+  {category:'🥬 野菜別栽培マニュアル（PDF）', items:[
+    {name:'ゴーヤー栽培マニュアル（特栽基準・肥培管理）', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_goya_1-14.pdf', pdf:true},
+    {name:'トマト栽培マニュアル（特栽基準・肥培管理）', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_tomato_1-14.pdf', pdf:true},
+    {name:'カボチャ栽培マニュアル（特栽基準・肥培管理）', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_kabocha_1-14.pdf', pdf:true},
+    {name:'オクラ栽培マニュアル（特栽基準・肥培管理）', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_okura_1-14.pdf', pdf:true},
+    {name:'ピーマン栽培マニュアル（特栽基準・肥培管理）', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_piman_1-10.pdf', pdf:true},
+    {name:'キュウリ栽培マニュアル（特栽基準・肥培管理）', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_kyuuri_1-14.pdf', pdf:true},
+    {name:'ニンジン栽培マニュアル（特栽基準・肥培管理）', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_ninjin_1-14.pdf', pdf:true},
+    {name:'レタス栽培マニュアル（特栽基準・肥培管理）', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_retasu_1-12.pdf', pdf:true},
+    {name:'チンゲンサイ・コマツナ栽培マニュアル', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_chingensai_1-12.pdf', pdf:true},
+    {name:'サヤインゲン栽培マニュアル', url:'https://www.pref.okinawa.lg.jp/_res/projects/default_project/_page_/001/010/680/tokusai_sayainngenn_1-18.pdf', pdf:true},
+  ]},
+  {category:'📊 生産カレンダー・統計', items:[
+    {name:'JAおきなわ 生産カレンダー（野菜・果物）', url:'https://www.ja-okinawa.or.jp/cast/calendar/'},
+    {name:'JAおきなわ 生産カレンダーPDF', url:'https://www.ja-okinawa.or.jp/cast/calendar/calendar/calendar.pdf', pdf:true},
+  ]},
+  {category:'🏢 普及センター・相談窓口', items:[
+    {name:'沖縄県北部農業改良普及センター（TEL：0980-52-2752）', url:'https://www.pref.okinawa.jp/shigoto/nogyo/1010390/1023807/1010806.html'},
+    {name:'ちむ美らさ（北部農改普及センター 広報誌）', url:'https://www.pref.okinawa.lg.jp/shigoto/shinkooroshi/1011519/1024246/1011542/1010385.html'},
+    {name:'沖縄県農林水産部 営農支援課', url:'https://www.pref.okinawa.jp/shigoto/nogyo/index.html'},
+  ]},
+  {category:'🌿 島野菜情報', items:[
+    {name:'くゎっちーおきなわ（沖縄食材情報サイト）', url:'https://kuwachii-okinawa.com/'},
+    {name:'食ZENラボ 島野菜28品目詳細ページ', url:'https://shokuzenlab.com/column-foods-okinawa-shimayasai-summer/'},
+    {name:'沖縄伝統野菜28種類について（解説記事）', url:'https://powderfoods-online.com/okinawa-introduction-of-vegetables/'},
+  ]},
+];
+
+// =========================================================
+// RENDER CALENDAR
+// =========================================================
+function renderCalendar(data) {
+  const tb = document.getElementById('calBody');
+  tb.innerHTML = '';
+  const getCode = (row, month) => {
+    const m = month - 1;
+    const y = row.months[m];
+    const p = row.plant && row.plant[m];
+    const h = row.harvest && row.harvest[m];
+    let dots = '';
+    if(y === 'Y') return '<span class="dot-yearround"></span>';
+    if(y === 'S') dots += '<span class="dot-sow"></span>';
+    if(p === 'P') dots += '<span class="dot-plant"></span>';
+    if(h === 'H') dots += '<span class="dot-harvest"></span>';
+    if(h === 'R') dots += '<span class="dot-peak"></span>';
+    return dots;
+  };
+  data.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-name', row.name);
+    let cells = `<td>${row.name}${row.hint ? `<br><small style="font-size:0.6rem;color:#888">${row.hint}</small>` : ''}</td>`;
+    for(let m=1;m<=12;m++) cells += `<td>${getCode(row,m)}</td>`;
+    tr.innerHTML = cells;
+    tb.appendChild(tr);
+  });
+}
+
+// =========================================================
+// RENDER VEGETABLES
+// =========================================================
+function renderVegetables(data) {
+  const container = document.getElementById('vegCards');
+  container.innerHTML = '';
+  if(data.length === 0) { container.innerHTML = noResult(); return; }
+  data.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.setAttribute('data-cat', v.cat);
+    card.innerHTML = `
+      <span class="card-emoji">${v.emoji}</span>
+      <div class="card-body">
+        <div class="card-name">${v.name}</div>
+        <div class="card-sub">収穫: ${v.harvestSeason}</div>
+        <div class="card-tags">
+          <span class="tag tag-season">🌱 ${v.sowSeason}</span>
+          ${v.area ? `<span class="tag tag-north">📍 ${v.area}</span>` : ''}
+        </div>
+      </div>`;
+    card.onclick = () => openVegModal(v);
+    container.appendChild(card);
+  });
+}
+
+function openVegModal(v) {
+  const html = `
+    <span class="modal-emoji">${v.emoji}</span>
+    <h3>${v.name}</h3>
+    <div class="info-row">
+      <span class="info-chip"><strong>播種</strong> ${v.sowSeason}</span>
+      <span class="info-chip"><strong>収穫</strong> ${v.harvestSeason}</span>
+      <span class="info-chip"><strong>pH</strong> ${v.ph}</span>
+      <span class="info-chip"><strong>収穫日数</strong> ${v.days}</span>
+    </div>
+    <div class="info-row">
+      <span class="info-chip"><strong>発芽適温</strong> ${v.germinateTemp}</span>
+      <span class="info-chip"><strong>生育適温</strong> ${v.growTemp}</span>
+      ${v.area ? `<span class="info-chip"><strong>北部産地</strong> ${v.area}</span>` : ''}
+    </div>
+    ${v.varieties && v.varieties.length ? `<div class="detail-section"><h4>🌱 主要品種</h4><p>${v.varieties.join('・')}</p></div>` : ''}
+    <div class="detail-section">
+      <h4>💊 主な栄養成分</h4>
+      <div class="nutrient-grid">
+        ${v.nutrients.map(n => `<div class="nutrient-item"><span>${n}</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="detail-section"><h4>💡 栽培ポイント</h4><p>${v.tips}</p></div>`;
+  showModal(html);
+}
+
+// =========================================================
+// RENDER ISLAND VEGETABLES
+// =========================================================
+function renderIsland(data) {
+  const grid = document.getElementById('islandGrid');
+  grid.innerHTML = '';
+  if(data.length === 0) { grid.innerHTML = noResult(); return; }
+  data.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'island-card';
+    card.innerHTML = `
+      <span class="ic-emoji">${v.emoji}</span>
+      <div class="ic-name">${v.name}</div>
+      <div class="ic-yomi">${v.yomi}</div>
+      <div class="ic-tags"><span class="badge ${v.badge}">${v.season}</span></div>`;
+    card.onclick = () => openIslandModal(v);
+    grid.appendChild(card);
+  });
+}
+
+function openIslandModal(v) {
+  const html = `
+    <span class="modal-emoji">${v.emoji}</span>
+    <h3>${v.name} <small style="font-size:0.7rem;color:#888">（${v.yomi}）</small></h3>
+    <div class="info-row">
+      <span class="info-chip"><strong>和名</strong> ${v.nameWa}</span>
+      <span class="info-chip"><strong>科</strong> ${v.family}</span>
+      <span class="info-chip"><strong>旬</strong> ${v.season}</span>
+    </div>
+    <div class="detail-section">
+      <h4>💊 主な栄養素</h4>
+      <p>${v.nutrients}</p>
+    </div>
+    <div class="detail-section">
+      <h4>🍳 調理・利用法</h4>
+      <p>${v.cooking}</p>
+    </div>
+    <div class="detail-section">
+      <h4>📝 特徴・説明</h4>
+      <p>${v.desc}</p>
+    </div>`;
+  showModal(html);
+}
+
+// =========================================================
+// RENDER FRUITS
+// =========================================================
+function renderFruits(data) {
+  const container = document.getElementById('fruitCards');
+  container.innerHTML = '';
+  if(data.length === 0) { container.innerHTML = noResult(); return; }
+  data.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'fruit-card';
+    card.innerHTML = `
+      <span class="fc-emoji">${f.emoji}</span>
+      <div class="fc-name">${f.name}</div>
+      <div class="fc-season">🗓 ${f.season}</div>
+      <div class="fc-area">📍 ${f.area}</div>`;
+    card.onclick = () => openFruitModal(f);
+    container.appendChild(card);
+  });
+}
+
+function openFruitModal(f) {
+  const html = `
+    <span class="modal-emoji">${f.emoji}</span>
+    <h3>${f.name}</h3>
+    <div class="info-row">
+      <span class="info-chip"><strong>収穫・出荷時期</strong> ${f.season}</span>
+    </div>
+    <div class="info-row">
+      <span class="info-chip"><strong>出荷ピーク</strong> ${f.peak}</span>
+      <span class="info-chip"><strong>主な産地</strong> ${f.area}</span>
+    </div>
+    <div class="detail-section">
+      <h4>💊 主な栄養素</h4>
+      <p>${f.nutrients}</p>
+    </div>
+    <div class="detail-section">
+      <h4>📝 特徴・説明</h4>
+      <p>${f.desc}</p>
+    </div>
+    <div class="detail-section">
+      <h4>💡 選び方・食べ方のコツ</h4>
+      <p>${f.tips}</p>
+    </div>`;
+  showModal(html);
+}
+
+// =========================================================
+// RENDER NORTH AREA
+// =========================================================
+function renderNorth() {
+  const container = document.getElementById('northArea');
+  container.innerHTML = '';
+  northAreaData.forEach(area => {
+    const card = document.createElement('div');
+    card.className = 'area-card';
+    let items = area.products.map(p => `
+      <div class="area-item">
+        <span class="em">${p.emoji}</span>
+        <div class="info">
+          <strong>${p.name}</strong>
+          <small>${p.detail}</small>
+        </div>
+      </div>`).join('');
+    card.innerHTML = `<div class="area-card-head">📍 ${area.area}</div><div class="area-card-body">${items}</div>`;
+    container.appendChild(card);
+  });
+}
+
+// =========================================================
+// RENDER MANUAL
+// =========================================================
+function renderManual() {
+  const container = document.getElementById('manualWrap');
+  container.innerHTML = '';
+  manualData.forEach(group => {
+    const card = document.createElement('div');
+    card.className = 'manual-card';
+    let items = group.items.map(item => `
+      <div class="manual-item">
+        <a href="${item.url}" target="_blank" rel="noopener">${item.name}</a>
+        ${item.pdf ? '<span class="pdf-badge">PDF</span>' : '<span style="font-size:0.65rem;background:#e8f5e9;color:#2e7d32;padding:2px 6px;border-radius:4px;white-space:nowrap;">WEB</span>'}
+      </div>`).join('');
+    card.innerHTML = `<div class="manual-card-head">${group.category}</div>${items}`;
+    container.appendChild(card);
+  });
+}
+
+// =========================================================
+// MODAL HELPERS
+// =========================================================
+function showModal(html) {
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalIfOutside(e) {
+  if(e.target === document.getElementById('modalOverlay')) closeModal();
+}
+function noResult() {
+  return `<div class="no-result" style="grid-column:1/-1"><span class="nr-emoji">🔍</span>該当するデータが見つかりません。</div>`;
+}
+
+// =========================================================
+// NAVIGATION
+// =========================================================
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('#mainNav button').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('#mainNav button');
+  const order = ['calendar','vegetables','island','fruits','north','manual'];
+  btns[order.indexOf(id)].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// =========================================================
+// CATEGORY FILTER
+// =========================================================
+function filterVeg(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = cat === 'all' ? vegData : vegData.filter(v => v.cat === cat);
+  renderVegetables(filtered);
+}
+
+// =========================================================
+// SEARCH
+// =========================================================
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if(!q) {
+    renderCalendar(calData);
+    renderVegetables(vegData);
+    renderIsland(islandVegData);
+    renderFruits(fruitData);
+    return;
+  }
+  // Calendar
+  const calFiltered = calData.filter(r => r.name.toLowerCase().includes(q));
+  renderCalendar(calFiltered);
+  // Vegetables
+  const vegFiltered = vegData.filter(v =>
+    v.name.toLowerCase().includes(q) ||
+    (v.nutrients && v.nutrients.join(' ').toLowerCase().includes(q)) ||
+    (v.varieties && v.varieties.join(' ').toLowerCase().includes(q)) ||
+    (v.area && v.area.toLowerCase().includes(q)) ||
+    (v.tips && v.tips.toLowerCase().includes(q))
+  );
+  renderVegetables(vegFiltered);
+  // Island
+  const islandFiltered = islandVegData.filter(v =>
+    v.name.toLowerCase().includes(q) ||
+    v.yomi.toLowerCase().includes(q) ||
+    v.nutrients.toLowerCase().includes(q) ||
+    v.desc.toLowerCase().includes(q) ||
+    v.cooking.toLowerCase().includes(q)
+  );
+  renderIsland(islandFiltered);
+  // Fruits
+  const fruitFiltered = fruitData.filter(f =>
+    f.name.toLowerCase().includes(q) ||
+    f.area.toLowerCase().includes(q) ||
+    f.nutrients.toLowerCase().includes(q) ||
+    f.desc.toLowerCase().includes(q)
+  );
+  renderFruits(fruitFiltered);
+}
+
+// =========================================================
+// SCROLL TOP
+// =========================================================
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTop');
+  if(window.scrollY > 200) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+
+// =========================================================
+// INIT
+// =========================================================
+renderCalendar(calData);
+renderVegetables(vegData);
+renderIsland(islandVegData);
+renderFruits(fruitData);
+renderNorth();
+renderManual();
+</script>
+</body>
+</html>
